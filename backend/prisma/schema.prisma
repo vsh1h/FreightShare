@@ -1,0 +1,125 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SHIPPER
+  CARRIER
+  ADMIN
+}
+
+enum LoadType {
+  PTL
+  FTL
+}
+
+enum PaymentMethod {
+  COD
+  ONLINE
+}
+
+enum ShipmentStatus {
+  PENDING
+  ACCEPTED
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum TransactionType {
+  CREDIT
+  DEBIT
+}
+
+enum TransactionMode {
+  COD
+  ONLINE
+  WITHDRAW
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  role           Role
+  name           String
+  email          String?         @unique
+  phone          String          @unique
+  passwordHash   String
+  wallet         Wallet?
+  carrierProfile CarrierProfile?
+  shipments      Shipment[]      @relation("UserShipments")
+  acceptedLoads  Shipment[]      @relation("CarrierShipments")
+  createdAt      DateTime        @default(now())
+}
+
+model CarrierProfile {
+  id          Int                 @id @default(autoincrement())
+  userId      Int                 @unique
+  truckType   String
+  capacityTon Float
+  verified    Boolean             @default(false)
+  documents   Json                // RC, Permit, License, PAN, etc.
+  status      VerificationStatus  @default(PENDING)
+  user        User                @relation(fields: [userId], references: [id])
+  verification AdminVerification?
+}
+
+model Shipment {
+  id              Int             @id @default(autoincrement())
+  userId          Int
+  carrierId       Int?
+  pickupLocation  String
+  dropLocation    String
+  cargoType       String
+  loadType        LoadType
+  weightKg        Float
+  priceQuote      Float
+  paymentMethod   PaymentMethod
+  status          ShipmentStatus  @default(PENDING)
+  scheduledDate   DateTime
+  acceptedAt      DateTime?
+  completedAt     DateTime?
+  user            User            @relation("UserShipments", fields: [userId], references: [id])
+  carrier         User?           @relation("CarrierShipments", fields: [carrierId], references: [id])
+  createdAt       DateTime        @default(now())
+}
+
+model Wallet {
+  id           Int            @id @default(autoincrement())
+  userId       Int            @unique
+  balance      Float           @default(0.0)
+  transactions Transaction[]
+  user         User            @relation(fields: [userId], references: [id])
+}
+
+model Transaction {
+  id           Int               @id @default(autoincrement())
+  walletId     Int
+  type         TransactionType
+  amount       Float
+  mode         TransactionMode
+  referenceId  String?
+  createdAt    DateTime          @default(now())
+  wallet       Wallet            @relation(fields: [walletId], references: [id])
+}
+
+model AdminVerification {
+  id          Int                @id @default(autoincrement())
+  carrierId   Int                @unique
+  verifiedBy  Int?
+  verifiedAt  DateTime?
+  remarks     String?
+  carrier     CarrierProfile     @relation(fields: [carrierId], references: [id])
+}
