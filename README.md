@@ -1,4 +1,4 @@
-🚛 FreightShare Platform
+# 🚛 FreightShare Platform
 
 FreightShare is a logistics management platform that connects verified shippers and truck drivers to enable efficient freight matching, secure payments, and real-time tracking.
 This repository contains the source code for the FreightShare MVP — built with a modern MERN-based architecture.
