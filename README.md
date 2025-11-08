@@ -35,4 +35,41 @@ Storage	Cloudinary / Firebase Storage	File & document uploads
 
 * Wallet and payment integration (UPI/online methods)
 
-⚠️ SOS and support system for safety
+* SOS and support system for safety
+
+🚀 Code Initiation
+--
+Follow these steps to get the FreightShare platform running locally:
+
+### 1. Clone the repository
+```
+git clone https://github.com/vsh1h/FreightShare.git
+cd freightshare-platform
+```
+
+### 2. Install dependencies
+
+Install server and client dependencies:
+```
+# Install backend dependencies
+cd backend
+npm install
+
+# Install frontend dependencies
+cd ../frontend
+npm install
+```
+
+### 3. Start the development servers
+
+Start backend and frontend apps:
+```
+# In backend/
+npm run dev
+
+# In frontend/ (new terminal)
+npm start
+```
+
+Open `http://localhost:3000` to view the frontend application.
+
