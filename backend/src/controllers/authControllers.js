@@ -34,9 +34,10 @@ const register = async (req, res) => {
 }
 
 const login =  async (req, res) => {
+  res.send("hello")
     try{
         const {username,email,password}=req.body
-        if (!password || !email || !username){
+        if (!password || !email || !username || !role){
             return res.status(400).json({
                 "error": "All fields are required"
             })
@@ -50,7 +51,11 @@ const login =  async (req, res) => {
         if (!user){
             return res.status(400).json({ message: "Invalid credentials" })
         }
+        if (user.role != role){
+          return res.status(403).json({message :"Request denied for the role "})
+        }
         const isMatch = await bcrypt.compare(password,user.password)
+        
         if (!isMatch){
             return res.status(400).json({ message: "Wrong password" })
         }
