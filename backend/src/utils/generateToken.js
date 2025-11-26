@@ -7,4 +7,4 @@ function generateToken(user){
     { expiresIn: "7d" }
   );
 };
-module.exports = generateToken;
+module.exports = { generateToken };

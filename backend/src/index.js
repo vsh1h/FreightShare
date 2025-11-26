@@ -1,4 +1,4 @@
-const express=require("express")
+const express = require("express")
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
 const cors = require('cors')
@@ -10,16 +10,16 @@ app.use("/api/auth", authRoutes);
 // setting up cors 
 // change local host dekh ke 
 app.use(cors({
-    origin: 'http://localhost:3000', 
-    methods: ['GET', 'POST'],
-    credentials: true
-  }));
-  
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
-const PORT = process.env.PORT || 5000
 
-app.listen(PORT, ()=>{
-    console.log(`server is listening at ${PORT}`)
+const PORT = process.env.PORT || 8000
+
+app.listen(PORT, () => {
+  console.log(`server is listening at ${PORT}`)
 })
 
 module.exports = app;
