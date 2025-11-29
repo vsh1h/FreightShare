@@ -1,8 +1,7 @@
 'use client'
 import { useState } from 'react';
-import banner from '../../assets/freightshare-banner.png'
+import banner from '../assets/freightshare-banner.png'
 import Image from "next/image";
-import { use } from 'react';
 import { useRouter } from 'next/navigation';
 
 
