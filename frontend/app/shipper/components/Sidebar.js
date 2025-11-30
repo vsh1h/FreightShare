@@ -11,7 +11,7 @@ const sidebarItems = [
   { label: "Dashboard", icon: Home, href: "/shipper/dashboard" },
   { label: "Profile", icon: User, href: "/shipper/profile" },
   { label: "Notifications", icon: Bell, href: "/shipper/notifications" },
-  { label: "Help-Support", icon: HelpCircle, href: "/shipper/help" },
+  { label: "Help-Support", icon: HelpCircle, href: "/shipper/helpAndSupport" },
 ];
 
 export default function Sidebar() {
