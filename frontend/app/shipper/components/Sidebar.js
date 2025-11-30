@@ -4,11 +4,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, Bell, Home, HelpCircle, Truck } from "lucide-react";
+import { User, Bell, Home, HelpCircle, Truck, MapPin } from "lucide-react";
 import { useState } from "react";
 
 const sidebarItems = [
   { label: "Dashboard", icon: Home, href: "/shipper/dashboard" },
+  { label: "Driver Map", icon: MapPin, href: "/Maps/driverMap" },
   { label: "Profile", icon: User, href: "/shipper/profile" },
   { label: "Notifications", icon: Bell, href: "/shipper/notifications" },
   { label: "Help-Support", icon: HelpCircle, href: "/shipper/helpAndSupport" },

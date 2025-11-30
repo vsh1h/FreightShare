@@ -110,7 +110,7 @@ export default function FreightShareHomepage() {
                                 <Package className="w-8 h-8 text-white" />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-800">Easy to Ship</h3>
-                            <p className="text-gray-600">We have focus prioritize to enumerate your maintained east l' trip.</p>
+                            <p className="text-gray-600">We have focus prioritize to enumerate your maintained east trip.</p>
                         </div>
 
 
