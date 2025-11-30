@@ -162,7 +162,7 @@ export default function Page() {
             >
               Sign up
             </button>
-            <p className="text-indigo-700 text-sm mt-4 text-center">Signed Up ? <a className="text-indigo-700 font-medium underline" href="/login">Login here</a></p>
+            <p className="text-indigo-700 text-sm mt-4 text-center">Already have an account? <a className="text-indigo-700 font-medium underline" href="/login">Login</a></p>
           </form>
         </div>
       </div>
