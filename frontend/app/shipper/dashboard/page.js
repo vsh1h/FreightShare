@@ -10,10 +10,6 @@ import Filters from "../components/Filters";
 import StatCircle from "../components/StatCircle";
 import { getDriverStats, getAvailableLoads, getActiveLoads } from "../../../lib/api";
 
-
-
-
-
 const driverId = 1; // Assuming driver ID is 1 for demo; in real app, get from auth
 
 export default function Dashboard() {
