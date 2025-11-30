@@ -12,13 +12,13 @@ export default function FooterBar({ setSosModal }) {
         SOS
       </button>
       <button
-        onClick={() => (window.location.href = "/driver/dashboard")}
+        onClick={() => (window.location.href = "/shipper/dashboard")}
         className="px-4 py-2 rounded-full bg-indigo-600 text-white"
       >
         Go to Dashboard
       </button>
       <button
-        onClick={() => (window.location.href = "/driver/helpAndSupport")}
+        onClick={() => (window.location.href = "/shipper/helpAndSupport")}
         className="px-4 py-2 rounded-full bg-indigo-600 text-white"
       >
         Help & Support

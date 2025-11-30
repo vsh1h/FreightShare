@@ -257,7 +257,7 @@ export default function DriverProfile() {
 
     setUploading(true);
     try {
-      const res = await fetch("/api/driver/docs", {
+      const res = await fetch("/api/shipper/docs", {
         method: "POST",
         body: form,
       });
