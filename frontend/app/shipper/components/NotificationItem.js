@@ -1,4 +1,4 @@
-import { Star, StarOff, Trash2, RotateCcw, Bell } from "lucide-react";
+import { Star, Trash2, RotateCcw, Bell } from "lucide-react";
 
 const highlightText = (text, searchTerm) => {
   if (!searchTerm) return text;
@@ -47,11 +47,7 @@ export default function NotificationItem({
 
         {/* ⭐ Favorite */}
         <div onClick={() => onFavorite(id)} className="cursor-pointer">
-          {isFavorite ? (
-            <Star className="text-yellow-500" />
-          ) : (
-            <StarOff className="text-gray-400" />
-          )}
+          <Star className={isFavorite ? "text-yellow-500" : "text-gray-400"} />
         </div>
 
         {/* 🗑 Delete OR ↩ Undo */}

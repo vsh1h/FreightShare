@@ -29,7 +29,6 @@ export default function Filters({
   return (
     <div className="w-full flex items-end gap-6 mt-4">
 
-      {/* BEGIN DATE */}
       <div className="flex flex-col">
         <label className="text-sm font-medium text-gray-700 mb-1">
           Begin Date
@@ -46,7 +45,6 @@ export default function Filters({
         </div>
       </div>
 
-      {/* END DATE */}
       <div className="flex flex-col">
         <label className="text-sm font-medium text-gray-700 mb-1">
           End Date
