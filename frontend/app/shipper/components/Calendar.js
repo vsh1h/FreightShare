@@ -192,15 +192,14 @@ export default function Calendar({ incomingRequests }) {
 
   return (
     <div className="w-[400px] bg-white shadow-lg border-l min-h-[1200px] flex flex-col">
-      {/* NAVBAR */}
+
       <div className="w-full bg-gray-100 py-3 px-4 shadow flex items-center justify-center">
         <h2 className="font-semibold text-lg ">Calendar & Trips </h2>
       </div>
       <br></br>
-      {/* CALENDAR */}
+
       <div className="bg-gray-50 rounded-xl shadow p-4 mx-4 mb-2 flex flex-col flex-1">
 
-        {/* Month Header */}
         <div className="flex justify-between items-center mb-3">
           <button onClick={prevMonth} className="text-xl">◀</button>
           <h2 className="text-lg font-semibold">
@@ -209,17 +208,16 @@ export default function Calendar({ incomingRequests }) {
           <button onClick={nextMonth} className="text-xl">▶</button>
         </div>
 
-        {/* Calendar Grid */}
         <div className="grid grid-cols-7 gap-1 mb-4 select-none">
-          {/* Weekday Labels */}
+
           {["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((day) => (
             <div key={day} className="text-center font-medium text-gray-600">{day}</div>
           ))}
-          {/* Empty slots for offset */}
+
           {[...Array(offset)].map((_, i) => (
             <div key={"empty" + i} />
           ))}
-          {/* Days */}
+
           {[...Array(daysInMonth)].map((_, i) => {
             const day = i + 1;
             const past = isPastDate(day);
@@ -241,7 +239,6 @@ export default function Calendar({ incomingRequests }) {
           })}
         </div>
 
-        {/* Filters Label */}
         <div className="mb-4">
           <span className="inline-block px-3 py-2 rounded-lg bg-indigo-600 text-white font-semibold select-none cursor-default">
             Filters
@@ -252,7 +249,6 @@ export default function Calendar({ incomingRequests }) {
         {/* Filters dropdowns and add option inputs */}
         <div className="mt-0 grid grid-cols-1 gap-3 mb-4">
 
-          {/* Distance filter */}
           <div>
             <label htmlFor="distance" className="block text-sm font-medium text-gray-700">Max Distance (km)</label>
             <div className="flex gap-2 items-center">
@@ -281,7 +277,6 @@ export default function Calendar({ incomingRequests }) {
             </div>
           </div>
 
-          {/* Price filter */}
           <div>
             <label htmlFor="price" className="block text-sm font-medium text-gray-700">Max Price (₹)</label>
             <div className="flex gap-2 items-center">
@@ -310,7 +305,6 @@ export default function Calendar({ incomingRequests }) {
             </div>
           </div>
 
-          {/* Range Min filter */}
           <div>
             <label htmlFor="rangeMin" className="block text-sm font-medium text-gray-700">Min Distance (km)</label>
             <div className="flex gap-2 items-center">
@@ -339,7 +333,6 @@ export default function Calendar({ incomingRequests }) {
             </div>
           </div>
 
-          {/* Range Max filter */}
           <div>
             <label htmlFor="rangeMax" className="block text-sm font-medium text-gray-700">Max Distance (km)</label>
             <div className="flex gap-2 items-center">
@@ -368,7 +361,6 @@ export default function Calendar({ incomingRequests }) {
             </div>
           </div>
 
-          {/* Type filter */}
           <div>
             <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type</label>
             <div className="flex gap-2 items-center">
@@ -398,7 +390,6 @@ export default function Calendar({ incomingRequests }) {
           </div>
         </div>
 
-        {/* Incoming Requests */}
         <div
           className="bg-white rounded-2xl p-6 shadow-sm flex flex-col flex-1 overflow-auto"
           style={{ maxHeight: requestsHeight ? `${requestsHeight}px` : "none" }}

@@ -31,7 +31,6 @@ export default function NotificationList({ activeTab = "all", searchTerm = "" })
   const [notifications, setNotifications] = useState(initialNotifications);
   const [deleted, setDeleted] = useState([]);
 
-  // ⭐ Favorite toggle
   const handleFavorite = (id) => {
     setNotifications((prev) =>
       prev.map((n) =>
@@ -40,14 +39,12 @@ export default function NotificationList({ activeTab = "all", searchTerm = "" })
     );
   };
 
-  // 🗑 Delete
   const handleDelete = (id) => {
     const removed = notifications.find((n) => n.id === id);
     setDeleted((prev) => [...prev, removed]);
     setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
 
-  // ↩ Undo
   const handleUndo = (id) => {
     const restore = deleted.find((n) => n.id === id);
     setNotifications((prev) => [...prev, restore]);
@@ -65,7 +62,6 @@ export default function NotificationList({ activeTab = "all", searchTerm = "" })
     list = notifications;
   }
 
-  // Filter by search term
   if (searchTerm) {
     list = list.filter((n) =>
       n.title.toLowerCase().includes(searchTerm.toLowerCase())

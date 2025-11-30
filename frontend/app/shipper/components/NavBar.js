@@ -3,7 +3,6 @@
 export default function Navbar() {
   return (
     <>
-      {/* Navbar */}
       <nav className="w-full bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div className="text-xl font-semibold text-gray-800">
           FreightShare
@@ -24,7 +23,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Search Bar below navbar */}
       <div className="w-full bg-white shadow-sm px-6 py-3">
         <input
           type="search"

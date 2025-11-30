@@ -12,7 +12,6 @@ export default function StatCircle({ value }) {
     { name: "Remaining", value: 100 - percent },
   ];
 
-  // your exact palette from the image
   // const COLORS = ["#4961C2", "#F5F2FF"];
   // Blue-purple & light lavender background
   const COLORS = ["#A0AEE8", "#F5F2FF"]; // faded lighter blue & lavender background

@@ -1,15 +1,12 @@
-
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, Bell, Home, HelpCircle, Truck, MapPin } from "lucide-react";
+import { User, Bell, Home, HelpCircle, Truck } from "lucide-react";
 import { useState } from "react";
 
 const sidebarItems = [
   { label: "Dashboard", icon: Home, href: "/shipper/dashboard" },
-  { label: "Driver Map", icon: MapPin, href: "/Maps/driverMap" },
   { label: "Profile", icon: User, href: "/shipper/profile" },
   { label: "Notifications", icon: Bell, href: "/shipper/notifications" },
   { label: "Help-Support", icon: HelpCircle, href: "/shipper/helpAndSupport" },
@@ -19,7 +16,6 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [isHovered, setIsHovered] = useState(false);
 
-  // Normalize paths
   const normalizePath = (path) =>
     path.endsWith("/") && path.length > 1 ? path.slice(0, -1) : path;
 
@@ -33,7 +29,6 @@ export default function Sidebar() {
   onMouseEnter={() => setIsHovered(true)}
   onMouseLeave={() => setIsHovered(false)}
 >
-      {/* Brand section */}
       <div className="flex items-center space-x-2">
         <Truck className="w-6 h-6 text-white" />
         {isHovered && (
@@ -43,7 +38,6 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* Sidebar Menu */}
       <nav className="flex flex-col gap-4 mt-6">
         {sidebarItems.map(({ label, icon: Icon, href }) => {
           const normalizedHref = normalizePath(href);
