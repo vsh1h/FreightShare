@@ -51,7 +51,7 @@ Our team consists of four dedicated members passionate about leveraging technolo
 
 | Layer         | Technology          | Purpose                            |
 | ------------- | ------------------- | ---------------------------------- |
-| Frontend      | React.js, TailwindCSS | User/carrier dashboards            |
+| Frontend      | Next.js, TailwindCSS | User/carrier dashboards            |
 | Backend       | Node.js (Express)   | API & business logic               |
 | Database      | MySQL + MongoDB     | Structured & real-time data        |
 | Auth          | JWT / Firebase Auth | Secure login                       |
