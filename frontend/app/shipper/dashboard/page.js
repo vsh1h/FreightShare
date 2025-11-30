@@ -57,9 +57,8 @@ export default function Dashboard() {
             <Quote />
             <Filters />
 
-            {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {/* Total Trips */}
+
             <div className="bg-white p-6 shadow rounded-xl flex justify-between items-center hover:border-2 hover:border-indigo-500 hover:scale-105 transition duration-300 ease-in-out">
               <div>
                 <p className="text-gray-500">Total Trips</p>
@@ -68,7 +67,6 @@ export default function Dashboard() {
               <StatCircle value={Math.round((stats.completedTrips / stats.totalTrips) * 100) || 0} />
             </div>
 
-            {/* Active Trips */}
             <div className="bg-white p-6 shadow rounded-xl flex justify-between items-center hover:border-2 hover:border-indigo-500 hover:scale-105 transition duration-300 ease-in-out">
               <div>
                 <p className="text-gray-500">Active Trips</p>
@@ -77,7 +75,6 @@ export default function Dashboard() {
               <StatCircle value={50} />
             </div>
 
-            {/* Completed Trips */}
             <div className="bg-white p-6 shadow rounded-xl flex justify-between items-center hover:border-2 hover:border-indigo-500 hover:scale-105 transition duration-300 ease-in-out">
               <div>
                 <p className="text-gray-500">Completed Trips</p>
@@ -88,8 +85,6 @@ export default function Dashboard() {
 
           </div>
 
-
-            {/* Trips List */}
             <div className="bg-white p-6 shadow rounded-xl space-y-4">
               <h3 className="text-xl font-semibold">Recent Trips</h3>
               {activeLoads.length > 0 ? (

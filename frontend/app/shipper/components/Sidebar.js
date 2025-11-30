@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, Bell, Home, HelpCircle, Truck } from "lucide-react";
+import { User, Bell, Home, HelpCircle, Truck, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const sidebarItems = [
@@ -15,6 +16,16 @@ const sidebarItems = [
 export default function Sidebar() {
   const pathname = usePathname();
   const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("token");
+    } catch (e) {
+      // ignore
+    }
+    router.push("/");
+  };
 
   const normalizePath = (path) =>
     path.endsWith("/") && path.length > 1 ? path.slice(0, -1) : path;
@@ -24,11 +35,14 @@ export default function Sidebar() {
   const sidebarWidthClass = isHovered ? "w-64" : "w-16";
 
   return (
-<div
-  className={"bg-indigo-700 text-white h-[160vh] p-6 flex flex-col gap-6 transition-width duration-300 ease-in-out " + sidebarWidthClass}
-  onMouseEnter={() => setIsHovered(true)}
-  onMouseLeave={() => setIsHovered(false)}
->
+    <div
+      className={
+        "bg-indigo-700 text-white h-[160vh] p-6 flex flex-col gap-6 transition-width duration-300 ease-in-out " +
+        sidebarWidthClass
+      }
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="flex items-center space-x-2">
         <Truck className="w-6 h-6 text-white" />
         {isHovered && (
@@ -62,7 +76,15 @@ export default function Sidebar() {
           );
         })}
       </nav>
+      <div className="mt-auto">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 text-xl font-medium cursor-pointer border-l-4 border-transparent hover:border-white hover:bg-[#7C7FE0] hover:rounded-full hover:scale-105 hover:shadow-md p-2"
+        >
+          <LogOut size={28} />
+          {isHovered && <span className="whitespace-nowrap">Logout</span>}
+        </button>
+      </div>
     </div>
   );
 }
-

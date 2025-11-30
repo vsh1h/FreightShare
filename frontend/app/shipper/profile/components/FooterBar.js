@@ -11,7 +11,7 @@ export default function FooterBar({ setSosModal }) {
       >
         SOS
       </button>
-      <button
+      {/* <button
         onClick={() => (window.location.href = "/shipper/dashboard")}
         className="px-4 py-2 rounded-full bg-indigo-600 text-white"
       >
@@ -22,7 +22,7 @@ export default function FooterBar({ setSosModal }) {
         className="px-4 py-2 rounded-full bg-indigo-600 text-white"
       >
         Help & Support
-      </button>
+      </button> */}
     </div>
   );
 }

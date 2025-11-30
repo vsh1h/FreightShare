@@ -81,7 +81,7 @@ export default function HelpAndSupportPage() {
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-3">
-                  <a
+                  {/* <a
                     href="/shipper/profile"
                     className="px-3 py-2 bg-white border rounded-lg text-indigo-600 text-sm hover:shadow"
                   >
@@ -92,7 +92,7 @@ export default function HelpAndSupportPage() {
                     className="px-3 py-2 bg-white border rounded-lg text-indigo-600 text-sm hover:shadow"
                   >
                     Dashboard
-                  </a>
+                  </a> */}
                   <a
                     href="mailto:support@freightshare.example"
                     className="px-3 py-2 bg-indigo-600 text-white rounded-lg text-sm"
