@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import TripCard from "../components/TripCard";
@@ -5,33 +8,47 @@ import Calendar from "../components/Calendar";
 import Quote from "../components/Quote";
 import Filters from "../components/Filters";
 import StatCircle from "../components/StatCircle";
+import { getDriverStats, getAvailableLoads, getActiveLoads } from "../../../lib/api";
 
 
 
 
 
-const incomingRequests = [
-  {
-    id: 1,
-    pickup: "Kirti Nagar",
-    drop: "Gurugram",
-    distance: 65,
-    price: 3200,
-    type: "Pallet",
-    date: "2025-11-23",
-  },
-  {
-    id: 2,
-    pickup: "Noida",
-    drop: "Ghaziabad",
-    distance: 25,
-    price: 1500,
-    type: "Container",
-    date: "2025-11-25",
-  }
-];
+const driverId = 1; // Assuming driver ID is 1 for demo; in real app, get from auth
 
 export default function Dashboard() {
+  const [stats, setStats] = useState({ totalTrips: 0, completedTrips: 0, activeTrips: 0 });
+  const [availableLoads, setAvailableLoads] = useState([]);
+  const [activeLoads, setActiveLoads] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [statsData, loadsData, activeData] = await Promise.all([
+          getDriverStats(driverId),
+          getAvailableLoads(),
+          getActiveLoads(driverId)
+        ]);
+        setStats(statsData);
+        setAvailableLoads(loadsData);
+        setActiveLoads(activeData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p className="text-xl">Loading dashboard...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-screen">
       <Sidebar />
@@ -50,27 +67,27 @@ export default function Dashboard() {
             <div className="bg-white p-6 shadow rounded-xl flex justify-between items-center hover:border-2 hover:border-indigo-500 hover:scale-105 transition duration-300 ease-in-out">
               <div>
                 <p className="text-gray-500">Total Trips</p>
-                <h2 className="text-3xl font-bold">124</h2>
+                <h2 className="text-3xl font-bold">{stats.totalTrips}</h2>
               </div>
-              <StatCircle value={63} />  {/* Example % */}
+              <StatCircle value={Math.round((stats.completedTrips / stats.totalTrips) * 100) || 0} />
             </div>
 
-            {/* Km Driven */}
+            {/* Active Trips */}
             <div className="bg-white p-6 shadow rounded-xl flex justify-between items-center hover:border-2 hover:border-indigo-500 hover:scale-105 transition duration-300 ease-in-out">
               <div>
-                <p className="text-gray-500">Km Driven</p>
-                <h2 className="text-3xl font-bold">87,421 km</h2>
+                <p className="text-gray-500">Active Trips</p>
+                <h2 className="text-3xl font-bold">{stats.activeTrips}</h2>
               </div>
-              <StatCircle value={45} /> 
+              <StatCircle value={50} />
             </div>
 
-            {/* Fuel Efficiency */}
+            {/* Completed Trips */}
             <div className="bg-white p-6 shadow rounded-xl flex justify-between items-center hover:border-2 hover:border-indigo-500 hover:scale-105 transition duration-300 ease-in-out">
               <div>
-                <p className="text-gray-500">Fuel Efficiency</p>
-                <h2 className="text-3xl font-bold">7.8 km/l</h2>
+                <p className="text-gray-500">Completed Trips</p>
+                <h2 className="text-3xl font-bold">{stats.completedTrips}</h2>
               </div>
-              <StatCircle value={78} />
+              <StatCircle value={Math.round((stats.completedTrips / stats.totalTrips) * 100) || 0} />
             </div>
 
           </div>
@@ -79,28 +96,22 @@ export default function Dashboard() {
             {/* Trips List */}
             <div className="bg-white p-6 shadow rounded-xl space-y-4">
               <h3 className="text-xl font-semibold">Recent Trips</h3>
-
-              <TripCard
-                route="Dallas → Phoenix"
-                status="Completed"
-                date="21 Nov 2025"
-              />
-
-              <TripCard
-                route="Austin → Denver"
-                status="In Transit"
-                date="23 Nov 2025"
-              />
-
-              <TripCard
-                route="Houston → Chicago"
-                status="Pending"
-                date="25 Nov 2025"
-              />
+              {activeLoads.length > 0 ? (
+                activeLoads.slice(0, 3).map((load) => (
+                  <TripCard
+                    key={load.id}
+                    route={`${load.pickupLocation} → ${load.dropLocation}`}
+                    status={load.status === 'ACCEPTED' ? 'In Transit' : load.status}
+                    date={new Date(load.createdAt).toLocaleDateString()}
+                  />
+                ))
+              ) : (
+                <p className="text-gray-500">No active trips</p>
+              )}
             </div>
           </div>
 
-          <Calendar incomingRequests={incomingRequests} />
+          <Calendar incomingRequests={availableLoads} />
         </div>
       </div>
     </div>
