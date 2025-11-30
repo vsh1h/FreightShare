@@ -3,9 +3,12 @@ const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
 const cors = require('cors')
 dotenv.config();
+// const authRoutes = require("./routes/authRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const connectMongo = require("./config/mongo");
+
 const app = express();
 app.use(express.json());
-app.use("/api/auth", authRoutes);
 
 // setting up cors 
 // change local host dekh ke 
@@ -15,11 +18,18 @@ app.use(cors({
   credentials: true
 }));
 
+app.use("/api/auth", authRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+
+app.get("/", (req, res) => {
+  res.send("FreightShare Backend Running");
+});
 
 const PORT = process.env.PORT || 8000
 
-app.listen(PORT, () => {
+app.listen(PORT, async() => {
   console.log(`server is listening at ${PORT}`)
+  await connectMongo();
 })
 
 module.exports = app;
