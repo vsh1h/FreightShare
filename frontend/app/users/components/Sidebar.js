@@ -8,10 +8,10 @@ import { User, Bell, Home, HelpCircle, Truck } from "lucide-react";
 import { useState } from "react";
 
 const sidebarItems = [
-  { label: "Dashboard", icon: Home, href: "/shipper/dashboard" },
-  { label: "Profile", icon: User, href: "/shipper/profile" },
-  { label: "Notifications", icon: Bell, href: "/shipper/notifications" },
-  { label: "Help-Support", icon: HelpCircle, href: "/shipper/help" },
+  { label: "Dashboard", icon: Home, href: "/users/dashboard" },
+  { label: "Profile", icon: User, href: "/users/profile" },
+  { label: "Notifications", icon: Bell, href: "/users/notifications" },
+  { label: "Help-Support", icon: HelpCircle, href: "/users/help" },
 ];
 
 export default function Sidebar() {
