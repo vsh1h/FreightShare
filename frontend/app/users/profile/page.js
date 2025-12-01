@@ -13,6 +13,7 @@ import EditProfileModal from "./components/EditProfileModal";
 import ShareModal from "./components/ShareModal";
 import PermissionModal from "./components/PermissionModal";
 import { buildPath as buildPathUtil } from "./utils/buildPath";
+import Sidebar from "../components/Sidebar";
 
 export default function UserProfile() {
     const [available, setAvailable] = useState(true);
@@ -261,129 +262,134 @@ export default function UserProfile() {
     const chartInfo = buildPath(chartData, 600, 160, chartMin, chartMax);
 
     return (
-        <div className="min-h-screen bg-[#faf7ff] p-8">
-            <div className="max-w-7xl mx-auto">
-                <ProfileHeader
-                    name={name}
-                    truckNameState={truckNameState}
-                    capacity={capacity}
-                    phone={phone}
-                    setEditModal={setEditModal}
-                    setProfileLink={setProfileLink}
-                    setTruckShareModal={setTruckShareModal}
-                    earnings={earnings}
-                    pendingCOD={pendingCOD}
-                    rating={rating}
-                />
+        <div className="min-h-screen bg-[#faf7ff]">
+            <div className="flex">
+                <Sidebar />
+                <div className="flex-1 p-8">
+                    <div className="max-w-7xl mx-auto">
+                        <ProfileHeader
+                            name={name}
+                            truckNameState={truckNameState}
+                            capacity={capacity}
+                            phone={phone}
+                            setEditModal={setEditModal}
+                            setProfileLink={setProfileLink}
+                            setTruckShareModal={setTruckShareModal}
+                            earnings={earnings}
+                            pendingCOD={pendingCOD}
+                            rating={rating}
+                        />
 
-                <div className="mt-6 grid grid-cols-12 gap-6">
-                    <LeftColumn
-                        available={available}
-                        setAvailable={setAvailable}
-                        capacity={capacity}
-                        setCapacity={setCapacity}
-                        chartMode={chartMode}
-                        setChartMode={setChartMode}
-                        chartInfo={chartInfo}
-                        months={months}
-                        recentTrips={recentTrips}
-                        tripsPage={tripsPage}
-                        setTripsPage={setTripsPage}
-                        tripsPageSize={tripsPageSize}
-                        tripsTotalPages={tripsTotalPages}
-                    />
+                        <div className="mt-6 grid grid-cols-12 gap-6">
+                            <LeftColumn
+                                available={available}
+                                setAvailable={setAvailable}
+                                capacity={capacity}
+                                setCapacity={setCapacity}
+                                chartMode={chartMode}
+                                setChartMode={setChartMode}
+                                chartInfo={chartInfo}
+                                months={months}
+                                recentTrips={recentTrips}
+                                tripsPage={tripsPage}
+                                setTripsPage={setTripsPage}
+                                tripsPageSize={tripsPageSize}
+                                tripsTotalPages={tripsTotalPages}
+                            />
 
-                    <RightColumn
+                            <RightColumn
+                                files={files}
+                                handleFileChange={handleFileChange}
+                                setShowModal={setShowModal}
+                                earnings={earnings}
+                                pendingCOD={pendingCOD}
+                                openQr={openQr}
+                                verificationStatus={verificationStatus}
+                                setVerificationStatus={setVerificationStatus}
+                                setUploadMessage={setUploadMessage}
+                                setPermissionModal={setPermissionModal}
+                                setToolsModal={setToolsModal}
+                            />
+                        </div>
+
+                        <FooterBar setSosModal={setSosModal} />
+                    </div>
+
+                    {sosModal && (
+                        <SosModal
+                            sosContacts={sosContacts}
+                            onClose={() => setSosModal(false)}
+                            handleCall={handleCall}
+                            handleSms={handleSms}
+                            handleShareMessage={handleShareMessage}
+                            handleCopyMessage={handleCopyMessage}
+                            sosSending={sosSending}
+                        />
+                    )}
+                    <UploadDocsModal
+                        show={showModal}
+                        onClose={closeUploadModal}
                         files={files}
                         handleFileChange={handleFileChange}
-                        setShowModal={setShowModal}
-                        earnings={earnings}
-                        pendingCOD={pendingCOD}
-                        openQr={openQr}
-                        verificationStatus={verificationStatus}
-                        setVerificationStatus={setVerificationStatus}
-                        setUploadMessage={setUploadMessage}
-                        setPermissionModal={setPermissionModal}
-                        setToolsModal={setToolsModal}
+                        uploadMessage={uploadMessage}
+                        uploading={uploading}
+                        handleUpload={handleUpload}
+                    />
+
+                    <QRModal
+                        show={qrModal}
+                        qrSrc={qrSrc}
+                        onClose={() => setQrModal(false)}
+                        downloadQr={downloadQr}
+                    />
+
+                    <ToolsModal
+                        show={toolsModal}
+                        onClose={() => setToolsModal(false)}
+                        distanceKm={distanceKm}
+                        setDistanceKm={setDistanceKm}
+                        numTolls={numTolls}
+                        setNumTolls={setNumTolls}
+                        avgToll={avgToll}
+                        setAvgToll={setAvgToll}
+                        avgSpeed={avgSpeed}
+                        setAvgSpeed={setAvgSpeed}
+                        fuelEfficiency={fuelEfficiency}
+                        setFuelEfficiency={setFuelEfficiency}
+                        fuelPrice={fuelPrice}
+                        setFuelPrice={setFuelPrice}
+                        calcResult={calcResult}
+                        setCalcResult={setCalcResult}
+                    />
+
+                    <EditProfileModal
+                        show={editModal}
+                        onClose={closeEditModal}
+                        editName={editName}
+                        setEditName={setEditName}
+                        editPhone={editPhone}
+                        setEditPhone={setEditPhone}
+                        editTruckName={editTruckName}
+                        setEditTruckName={setEditTruckName}
+                        editCapacity={editCapacity}
+                        setEditCapacity={setEditCapacity}
+                        submitEdit={submitEdit}
+                    />
+                    <ShareModal
+                        show={truckShareModal}
+                        onClose={() => setTruckShareModal(false)}
+                        profileLink={profileLink}
+                    />
+                    <PermissionModal
+                        show={permissionModal}
+                        onClose={() => setPermissionModal(false)}
+                        name={name}
+                        phone={phone}
+                        truckNameState={truckNameState}
+                        capacity={capacity}
                     />
                 </div>
-
-                <FooterBar setSosModal={setSosModal} />
             </div>
-
-            {sosModal && (
-                <SosModal
-                    sosContacts={sosContacts}
-                    onClose={() => setSosModal(false)}
-                    handleCall={handleCall}
-                    handleSms={handleSms}
-                    handleShareMessage={handleShareMessage}
-                    handleCopyMessage={handleCopyMessage}
-                    sosSending={sosSending}
-                />
-            )}
-            <UploadDocsModal
-                show={showModal}
-                onClose={closeUploadModal}
-                files={files}
-                handleFileChange={handleFileChange}
-                uploadMessage={uploadMessage}
-                uploading={uploading}
-                handleUpload={handleUpload}
-            />
-
-            <QRModal
-                show={qrModal}
-                qrSrc={qrSrc}
-                onClose={() => setQrModal(false)}
-                downloadQr={downloadQr}
-            />
-
-            <ToolsModal
-                show={toolsModal}
-                onClose={() => setToolsModal(false)}
-                distanceKm={distanceKm}
-                setDistanceKm={setDistanceKm}
-                numTolls={numTolls}
-                setNumTolls={setNumTolls}
-                avgToll={avgToll}
-                setAvgToll={setAvgToll}
-                avgSpeed={avgSpeed}
-                setAvgSpeed={setAvgSpeed}
-                fuelEfficiency={fuelEfficiency}
-                setFuelEfficiency={setFuelEfficiency}
-                fuelPrice={fuelPrice}
-                setFuelPrice={setFuelPrice}
-                calcResult={calcResult}
-                setCalcResult={setCalcResult}
-            />
-
-            <EditProfileModal
-                show={editModal}
-                onClose={closeEditModal}
-                editName={editName}
-                setEditName={setEditName}
-                editPhone={editPhone}
-                setEditPhone={setEditPhone}
-                editTruckName={editTruckName}
-                setEditTruckName={setEditTruckName}
-                editCapacity={editCapacity}
-                setEditCapacity={setEditCapacity}
-                submitEdit={submitEdit}
-            />
-            <ShareModal
-                show={truckShareModal}
-                onClose={() => setTruckShareModal(false)}
-                profileLink={profileLink}
-            />
-            <PermissionModal
-                show={permissionModal}
-                onClose={() => setPermissionModal(false)}
-                name={name}
-                phone={phone}
-                truckNameState={truckNameState}
-                capacity={capacity}
-            />
         </div>
     );
 }
