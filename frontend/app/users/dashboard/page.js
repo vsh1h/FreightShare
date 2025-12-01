@@ -2,7 +2,7 @@
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import TripCard from "../components/TripCard";
-import Calendar from "../../shipper/components/Calendar";
+import Calendar from "../components/Calendar";
 import Quote from "../components/Quote";
 import Filters from "../components/Filters";
 import StatCircle from "../components/StatCircle";
@@ -62,7 +62,7 @@ export default function Dashboard() {
         <div className="flex h-screen">
             <Sidebar />
 
-            <div className="flex-1 bg-gradient-to-b from-[rgba(237,200,255,0.2)] to-transparent min-h-screen">
+            <div className="flex-1 bg-gradient-to-b from-[rgba(237,200,255,0.2)] to-transparent min-h-screen overflow-y-auto overflow-x-auto">
                 <Header title="User Dashboard" />
 
                 <div className="p-6 flex space-x-6">
