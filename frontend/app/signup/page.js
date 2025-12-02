@@ -185,7 +185,7 @@ export default function Page() {
                 <option className="text-indigo-900" value="SHIPPER">
                   Shipper
                 </option>
-                <option className="text-indigo-900" value="DRIVER">
+                <option className="text-indigo-900" value="CARRIER">
                   Driver
                 </option>
               </select>
