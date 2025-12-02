@@ -78,31 +78,28 @@ export default function RightColumn({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab("track")}
-              className={`px-2 py-1 rounded ${
-                activeTab === "track"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100"
-              }`}
+              className={`px-2 py-1 rounded ${activeTab === "track"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-100"
+                }`}
             >
               Track
             </button>
             <button
               onClick={() => setActiveTab("past")}
-              className={`px-2 py-1 rounded ${
-                activeTab === "past"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100"
-              }`}
+              className={`px-2 py-1 rounded ${activeTab === "past"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-100"
+                }`}
             >
               Past
             </button>
             <button
               onClick={() => setActiveTab("pending")}
-              className={`px-2 py-1 rounded ${
-                activeTab === "pending"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100"
-              }`}
+              className={`px-2 py-1 rounded ${activeTab === "pending"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-100"
+                }`}
             >
               Pending
             </button>
@@ -194,29 +191,7 @@ export default function RightColumn({
         </div>
       </div>
 
-      {/* Wallet */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm">
-        <div className="flex justify-between items-center">
-          <h4 className="font-medium">Wallet</h4>
-          <div>₹{earnings}</div>
-        </div>
 
-        <div className="text-sm text-gray-600 mt-3">
-          Pending COD: ₹{pendingCOD}
-        </div>
-
-        <div className="mt-3 flex gap-3">
-          <button className="flex-1 py-2 bg-indigo-600 text-white rounded-lg">
-            Withdraw
-          </button>
-          <button
-            onClick={openQr}
-            className="flex-1 py-2 bg-white border rounded-lg"
-          >
-            Share QR
-          </button>
-        </div>
-      </div>
 
       {/* Notifications */}
       <div className="bg-white rounded-2xl p-4 shadow-sm">
@@ -270,53 +245,8 @@ export default function RightColumn({
           </button>
         </div>
       </div>
-
-      {/* Ratings */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm">
-        <h4 className="font-medium">Rate</h4>
-        <div className="mt-3 text-sm text-gray-600">Rate the website</div>
-        <div className="flex items-center gap-2 mt-2">
-          {[1, 2, 3, 4, 5].map((s) => (
-            <button
-              key={s}
-              onClick={() => setWebsiteRating(s)}
-              className={`text-2xl ${
-                websiteRating >= s ? "text-amber-400" : ""
-              }`}
-            >
-              ★
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-4 text-sm text-gray-600">
-          Driver Ratings (past deliveries)
-        </div>
-        <div className="mt-2 space-y-2">
-          {orders.map((o) => (
-            <div key={o.id} className="flex items-center justify-between">
-              <div className="text-sm">
-                {o.driver} • {o.id}
-              </div>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <button
-                    key={s}
-                    onClick={() =>
-                      setDriverRatings((prev) => ({ ...prev, [o.id]: s }))
-                    }
-                    className={`${
-                      (driverRatings[o.id] || 0) >= s ? "text-amber-400" : ""
-                    }`}
-                  >
-                    ★
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
+
+
   );
 }
