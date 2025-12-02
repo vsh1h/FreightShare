@@ -69,7 +69,7 @@ export default function Page() {
                 height={80}
               />
             </button>
-            {/* text-sm text-indigo-700/80 mt-3 */}
+            
             <div className="flex items-center gap-4 w-full my-5">
               <div className="w-full h-px bg-indigo-100"></div>
               <p className="w-full text-nowrap text-sm text-indigo-700/80 text-center">

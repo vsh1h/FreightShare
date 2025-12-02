@@ -362,6 +362,7 @@ export default function DriverProfile() {
               setTruckModal={setTruckModal}
               setProfileLink={setProfileLink}
               setTruckShareModal={setTruckShareModal}
+              setSosModal={setSosModal}
               earnings={earnings}
               pendingCOD={pendingCOD}
               rating={rating}

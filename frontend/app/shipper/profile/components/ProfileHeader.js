@@ -17,6 +17,7 @@ export default function ProfileHeader({
   earnings,
   pendingCOD,
   rating,
+  setSosModal,
 }) {
   return (
     <div className="bg-white/80 backdrop-blur rounded-2xl p-6 shadow-md">
@@ -38,7 +39,7 @@ export default function ProfileHeader({
           </p>
           <p className="text-sm text-gray-500">{phone}</p>
 
-          <div className="flex gap-3 mt-3">
+          <div className="flex gap-3 mt-3 items-center">
             <button
               onClick={() => {
                 setEditModal(true);
@@ -69,6 +70,13 @@ export default function ProfileHeader({
               className="px-4 py-2 rounded-lg bg-white text-indigo-600 border"
             >
               Share
+            </button>
+
+            <button
+              onClick={() => setSosModal && setSosModal(true)}
+              className="px-3 py-2 rounded-full bg-red-50 text-red-600 border"
+            >
+              SOS
             </button>
           </div>
         </div>
