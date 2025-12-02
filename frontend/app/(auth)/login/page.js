@@ -124,7 +124,7 @@ export default function Page() {
                   required
                 />
               </div>
-              <div className="w-full mt-6">
+              {/* <div className="w-full mt-6">
                 <label className="text-sm text-indigo-800">Login as:</label>
                 <select
                   className="w-full mt-2 border border-indigo-100 rounded-full h-12 px-4 text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-200 bg-white"
@@ -140,10 +140,17 @@ export default function Page() {
                     Driver
                   </option>
                 </select>
-              </div>
+              </div> */}
 
-              <div className="w-full flex items-center justify-between mt-8 text-indigo-700/80">
-                <div className="flex items-center gap-2">
+              <button
+                type="submit"
+                className="mt-8 w-full h-12 rounded-full text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-95 transition font-semibold shadow-md"
+              >
+                Login
+              </button>
+
+              <div className="w-full flex justify-center mt-8 text-indigo-700/80">
+                {/* <div className="flex items-center gap-2">
                   <input
                     className="h-5 w-5 accent-indigo-600"
                     type="checkbox"
@@ -152,21 +159,21 @@ export default function Page() {
                   <label className="text-sm text-indigo-800" htmlFor="checkbox">
                     Remember me
                   </label>
-                </div>
+                </div> */}
                 <a className="text-sm text-indigo-600 hover:underline" href="#">
                   Forgot password?
                 </a>
               </div>
 
-              <button
-                type="submit"
-                className="mt-8 w-full h-12 rounded-full text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-95 transition font-semibold shadow-md"
-              >
-                Login
-              </button>
-              
-              <p className="text-indigo-700 text-sm mt-4 text-center">Don't have an account? <a className="text-indigo-700 font-medium underline" href="/signup">
-                Sign up </a>
+
+              <p className="text-indigo-700 text-sm mt-4 text-center">
+                Don't have an account?{" "}
+                <a
+                  className="text-indigo-700 font-medium underline"
+                  href="/signup"
+                >
+                  Sign up{" "}
+                </a>
               </p>
             </form>
           </div>
