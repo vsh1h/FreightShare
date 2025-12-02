@@ -9,7 +9,6 @@ const {
   closeTicket,
 } = require("../controllers/helpSupportControllers");
 
-// All routes require authentication
 router.post("/tickets", protect, createTicket);
 router.get("/tickets", protect, getTickets);
 router.get("/tickets/:id", protect, getTicketById);

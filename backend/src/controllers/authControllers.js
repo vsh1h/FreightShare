@@ -1,12 +1,8 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
-const dotenv = require('dotenv');
+const prisma = require("../config/prisma");
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../utils/generateToken');
 
-dotenv.config();
-
-const register = async (req, res) => {
+const signup = async (req, res) => {
   try {
     const { name, email, phone, password, role } = req.body;
 
@@ -93,4 +89,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+module.exports = { signup, login };

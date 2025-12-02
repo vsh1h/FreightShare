@@ -1,5 +1,3 @@
-// src/controllers/dashboardControllers.js
-
 const prisma = require("../config/db");
 const DriverLocation = require("../models/DriverLocation");
 
