@@ -7,21 +7,9 @@ export default function FooterBar({ setSosModal }) {
         <div className="mt-6 flex gap-3">
             <button
                 onClick={() => setSosModal(true)}
-                className="px-4 py-2 rounded-full bg-red-50 text-red-600"
+                className="px-4 py-2 rounded-full bg-red-100 text-red-600"
             >
                 SOS
-            </button>
-            <button
-                onClick={() => (window.location.href = "/users/dashboard")}
-                className="px-4 py-2 rounded-full bg-indigo-600 text-white"
-            >
-                Go to Dashboard
-            </button>
-            <button
-                onClick={() => (window.location.href = "/users/helpAndSupport")}
-                className="px-4 py-2 rounded-full bg-indigo-600 text-white"
-            >
-                Help & Support
             </button>
         </div>
     );
