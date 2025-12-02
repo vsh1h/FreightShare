@@ -13,7 +13,7 @@ app.use(express.json());
 // setting up cors 
 // change local host dekh ke 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://freight-share.vercel.app/',
   methods: ['GET', 'POST'],
   credentials: true
 }));
