@@ -34,6 +34,28 @@ export default function NotificationTabs({ activeTab, onTabChange }) {
           >
             Favorite
           </button>
+
+          <button
+            onClick={() => onTabChange("send")}
+            className={`pb-2 ${
+              activeTab === "send"
+                ? "text-indigo-600 border-b-2 border-indigo-600"
+                : "text-gray-600"
+            }`}
+          >
+            Send
+          </button>
+
+          <button
+            onClick={() => onTabChange("sent")}
+            className={`pb-2 ${
+              activeTab === "sent"
+                ? "text-indigo-600 border-b-2 border-indigo-600"
+                : "text-gray-600"
+            }`}
+          >
+            Sent
+          </button>
         </div>
       </div>
     );

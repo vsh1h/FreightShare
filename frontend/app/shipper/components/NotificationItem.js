@@ -1,4 +1,4 @@
-import { Star, StarOff, Trash2, RotateCcw, Bell } from "lucide-react";
+import { Star, StarOff, Trash2, RotateCcw, Bell, Eye } from "lucide-react";
 
 const highlightText = (text, searchTerm) => {
   if (!searchTerm) return text;
@@ -24,14 +24,18 @@ export default function NotificationItem({
   onDelete,
   onFavorite,
   onUndo,
+  onClick,
 }) {
   return (
     <div className="flex items-center justify-between bg-white hover:bg-indigo-100 transition p-4 rounded-lg border border-indigo-100 shadow-sm">
       <div className="flex items-start gap-4">
-        
+        <button onClick={onClick} className="cursor-pointer">
+          <Eye className="text-blue-600" />
+        </button>
+
         {isNew && <span className="w-3 h-3 bg-indigo-600 rounded-full mt-2"></span>}
 
-        <Bell className="text-indigo-600 mt-1" />
+        <span className="text-blue-600 mt-1">🔔</span>
 
         <div>
           <p className="font-medium text-gray-800">{highlightText(title, searchTerm)}</p>
@@ -50,15 +54,9 @@ export default function NotificationItem({
         </div>
 
         {isDeletedTab ? (
-          <RotateCcw
-            className="text-green-600 cursor-pointer"
-            onClick={() => onUndo(id)}
-          />
+          <button onClick={() => onUndo(id)}>↻</button>
         ) : (
-          <Trash2
-            className="text-red-500 cursor-pointer"
-            onClick={() => onDelete(id)}
-          />
+          <button onClick={() => onDelete(id)}>🗑️</button>
         )}
       </div>
     </div>
