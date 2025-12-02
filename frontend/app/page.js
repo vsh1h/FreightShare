@@ -18,8 +18,7 @@ export default function FreightShareHomepage() {
                     </div>
                     <div className="hidden md:flex items-center space-x-8">
                         <Link href="/" className="text-gray-600 hover:text-purple-500 transition-colors">Home</Link>
-                        <Link href="/products" className="text-gray-600 hover:text-purple-500 transition-colors">Products</Link>
-                        <Link href="/development" className="text-gray-600 hover:text-purple-500 transition-colors">Development</Link>
+                        <Link href="/contact" className="text-gray-600 hover:text-purple-500 transition-colors">Contact</Link>
                         <Link href="/login" className="text-gray-600 hover:text-purple-500 transition-colors">Log In</Link>
                         <Link href="/signup" className="bg-purple-500 hover:bg-purple-600 text-white px-5 py-2 rounded-full transition-colors font-medium">Sign Up</Link>
                     </div>
