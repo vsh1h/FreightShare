@@ -60,22 +60,7 @@ export default function ProfileHeader({
           </div>
         </div>
 
-        <div className="w-64 grid grid-cols-3 gap-4">
-          <div className="bg-[#faf5ff] rounded-lg p-3 text-center">
-            <div className="text-sm text-gray-500">Earnings</div>
-            <div className="font-semibold text-lg">₹{earnings}</div>
-          </div>
 
-          <div className="bg-[#faf5ff] rounded-lg p-3 text-center">
-            <div className="text-sm text-gray-500">COD Pending</div>
-            <div className="font-semibold text-lg">₹{pendingCOD}</div>
-          </div>
-
-          <div className="bg-[#faf5ff] rounded-lg p-3 text-center">
-            <div className="text-sm text-gray-500">Rating</div>
-            <div className="font-semibold text-lg">{rating} ⭐</div>
-          </div>
-        </div>
       </div>
     </div>
   );
