@@ -19,16 +19,17 @@ export default function Page() {
       };
 
       const res = await api.post("/auth/login", data);
-
+      console.log(res)
+      console.log(res.data)
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
 
         const userRole = res.data.users.role;
 
         if (userRole === "SHIPPER") {
-          router.push("/shipper/dashboard");
-        } else if (userRole === "DRIVER" || userRole === "CARRIER") {
           router.push("/users/dashboard");
+        } else if (userRole === "CARRIER") {
+          router.push("/shipper/dashboard");
         } else {
           router.push("/");
         }
