@@ -23,7 +23,7 @@ export default function Page() {
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
 
-        const userRole = res.data.user.role;
+        const userRole = res.data.users.role;
 
         if (userRole === "SHIPPER") {
           router.push("/shipper/dashboard");
