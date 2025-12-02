@@ -13,9 +13,9 @@ app.use(express.json());
 // setting up cors 
 // change local host dekh ke 
 app.use(cors({
-  origin: 'https://freight-share.vercel.app/',
-  methods: ['GET', 'POST'],
-  credentials: true
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use("/api/auth", authRoutes);
