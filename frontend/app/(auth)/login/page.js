@@ -2,36 +2,31 @@
 import { useState } from "react";
 import banner from "../../assets/freightshare-banner.png";
 import Image from "next/image";
-import { use } from "react";
 import { useRouter } from "next/navigation";
+import { api } from "../../../lib/api";
 
 export default function Page() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("CUSTOMER");
+  const [role, setRole] = useState("SHIPPER");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: "Content-Type:application/json",
-        body: JSON.stringify({ email, password, role }),
-      });
-      // this json belongs to the fetch function not the express json - both are different
-      const data = res.json();
-      // we use res.ok - data.ok nahi - res.ok conatins data ki succesfull hua ki nahi response , data me esa kn hota backend se aata hai
-      if (res.ok) {
-        localStorage.setItem("token", data.token);
-        alert("Login Successful");
-      } else {
-        //change to data.message - if error
-        alert(data.console.error() || "Login Failed");
+      const data = {
+        email: email,
+        password: password
+      };
+      const res = await api.post('/auth/login', data);
+      console.log(res.data);
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        const dashboardPath = role === "SHIPPER" ? "/users/dashboard" : "/shipper/dashboard";
+        router.push(dashboardPath);
       }
-    } catch {
-      console.error(error);
-      alert("Something went wrong");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -49,7 +44,7 @@ export default function Page() {
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-transparent">
         <div className="relative">
           <div className="bg-white rounded-3xl shadow-2xl border border-indigo-100/60 p-6 md:p-8 w-80 md:w-96">
-            <form className="w-full flex flex-col items-center">
+            <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
               <h2 className="text-4xl font-medium bg-gradient-to-r from-purple-600 to-indigo-500 text-transparent bg-clip-text">
                 Log in
               </h2>
@@ -124,7 +119,7 @@ export default function Page() {
                   required
                 />
               </div>
-              {/* <div className="w-full mt-6">
+              <div className="w-full mt-6">
                 <label className="text-sm text-indigo-800">Login as:</label>
                 <select
                   className="w-full mt-2 border border-indigo-100 rounded-full h-12 px-4 text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-200 bg-white"
@@ -133,14 +128,14 @@ export default function Page() {
                     setRole(e.target.value);
                   }}
                 >
-                  <option className="text-indigo-900" value="CUSTOMER">
-                    Customer
+                  <option className="text-indigo-900" value="SHIPPER">
+                    Shipper
                   </option>
                   <option className="text-indigo-900" value="DRIVER">
                     Driver
                   </option>
                 </select>
-              </div> */}
+              </div>
 
               <button
                 type="submit"

@@ -1,4 +1,10 @@
+import axios from "axios";
+
 const API_BASE_URL = 'http://localhost:8000/api';
+
+export const api=axios.create({
+  baseURL:API_BASE_URL
+})
 
 export const getDriverStats = async (driverId) => {
   const response = await fetch(`${API_BASE_URL}/dashboard/driver-stats?driverId=${driverId}`);

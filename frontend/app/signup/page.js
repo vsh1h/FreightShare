@@ -3,34 +3,35 @@ import { useState } from "react";
 import banner from "../assets/freightshare-banner.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import {api} from '../../lib/api'
 
 export default function Page() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("CUSTOMER");
+  const [role, setRole] = useState("SHIPPER");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, password, role }),
-      });
-      // parse JSON response
-      const data = await res.json();
-      if (res.ok) {
-        if (data.token) localStorage.setItem("token", data.token);
-        alert("Login/Signup Successful");
-      } else {
-        alert(data.message || "Signup Failed");
+    const data={
+      name:name,
+      phone:phone,
+      password:password,
+      email:email,
+      role:role
+    }
+    try{
+      const res = await api.post('/auth/signup', data)
+      console.log(res.token)
+      if(res.data.token){
+        localStorage.setItem("token", res.data.token)
+        router.push('/login')
       }
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
+      
+    }catch(error){
+      console.log(error)
     }
   };
 
@@ -181,30 +182,14 @@ export default function Page() {
                   setRole(e.target.value);
                 }}
               >
-                <option className=" text-indigo-900" value="CUSTOMER">
-                  Customer
+                <option className="text-indigo-900" value="SHIPPER">
+                  Shipper
                 </option>
-                <option className=" text-indigo-900" value="DRIVER">
+                <option className="text-indigo-900" value="DRIVER">
                   Driver
                 </option>
               </select>
             </div>
-
-            {/* <div className="w-full flex items-center justify-between mt-8 text-indigo-700/80">
-              <div className="flex items-center gap-2">
-                <input
-                  className="h-5 w-5 accent-indigo-600"
-                  type="checkbox"
-                  id="checkbox"
-                />
-                <label className="text-sm text-indigo-800" htmlFor="checkbox">
-                  Remember me
-                </label>
-              </div>
-              <a className="text-sm text-indigo-600  underline" href="#">
-                Forgot password?
-              </a>
-            </div> */}
 
             <button
               type="submit"
