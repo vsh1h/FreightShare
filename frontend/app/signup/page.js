@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("CUSTOMER");
@@ -15,20 +17,18 @@ export default function Page() {
     try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
-        headers: "Content-Type:application/json",
-        body: JSON.stringify({ email, password, role }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, email, password, role }),
       });
-      // this json belongs to the fetch function not the express json - both are different
-      const data = res.json();
-      // we use res.ok - data.ok nahi - res.ok conatins data ki succesfull hua ki nahi response , data me esa kn hota backend se aata hai
+      // parse JSON response
+      const data = await res.json();
       if (res.ok) {
-        localStorage.setItem("token", data.token);
-        alert("Login Successful");
+        if (data.token) localStorage.setItem("token", data.token);
+        alert("Login/Signup Successful");
       } else {
-        //change to data.message - if error
-        alert(data.console.error() || "Login Failed");
+        alert(data.message || "Signup Failed");
       }
-    } catch {
+    } catch (error) {
       console.error(error);
       alert("Something went wrong");
     }
@@ -47,7 +47,10 @@ export default function Page() {
 
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-transparent">
         <div className="bg-white rounded-3xl shadow-2xl border border-indigo-100/60 p-6 md:p-8 w-80 md:w-96">
-          <form className="w-full flex flex-col items-center">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full flex flex-col items-center"
+          >
             <h2 className="text-4xl font-medium bg-gradient-to-r from-purple-600 to-indigo-500 text-transparent bg-clip-text">
               Sign up
             </h2>
@@ -96,6 +99,53 @@ export default function Page() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-transparent text-indigo-900 placeholder-indigo-400 outline-none text-sm w-full h-full"
+                required
+              />
+            </div>
+
+            <div className="flex items-center mt-6 w-full bg-transparent border border-indigo-100 h-12 rounded-full overflow-hidden pl-6 gap-2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zM4 20c0-2.761 4.477-4 8-4s8 1.239 8 4v1H4v-1z"
+                  fill="#6B7280"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="Full name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="bg-transparent text-indigo-900 placeholder-indigo-400 outline-none text-sm w-full h-full"
+                required
+              />
+            </div>
+
+            <div className="flex items-center mt-6 w-full bg-transparent border border-indigo-100 h-12 rounded-full overflow-hidden pl-6 gap-2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.28-.09-.58-.03-.78.17l-2.2 2.2c-3.1-1.6-5.6-4.1-7.2-7.2l2.2-2.2c.2-.2.26-.5.17-.78C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"
+                  fill="#6B7280"
+                />
+              </svg>
+              <input
+                type="tel"
+                placeholder="Phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="bg-transparent text-indigo-900 placeholder-indigo-400 outline-none text-sm w-full h-full"
+                pattern="[0-9+\-() ]{7,20}"
                 required
               />
             </div>
@@ -162,7 +212,15 @@ export default function Page() {
             >
               Sign up
             </button>
-            <p className="text-indigo-700 text-sm mt-4 text-center">Already have an account? <a className="text-indigo-700 font-medium underline" href="/login">Login</a></p>
+            <p className="text-indigo-700 text-sm mt-4 text-center">
+              Already have an account?{" "}
+              <a
+                className="text-indigo-700 font-medium underline"
+                href="/login"
+              >
+                Login
+              </a>
+            </p>
           </form>
         </div>
       </div>
