@@ -190,7 +190,7 @@ export default function Page() {
               </select>
             </div>
 
-            <div className="w-full flex items-center justify-between mt-8 text-indigo-700/80">
+            {/* <div className="w-full flex items-center justify-between mt-8 text-indigo-700/80">
               <div className="flex items-center gap-2">
                 <input
                   className="h-5 w-5 accent-indigo-600"
@@ -204,7 +204,7 @@ export default function Page() {
               <a className="text-sm text-indigo-600  underline" href="#">
                 Forgot password?
               </a>
-            </div>
+            </div> */}
 
             <button
               type="submit"
