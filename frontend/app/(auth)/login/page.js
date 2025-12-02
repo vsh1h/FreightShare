@@ -8,7 +8,6 @@ import { api } from "../../../lib/api";
 export default function Page() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("SHIPPER");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -16,14 +15,23 @@ export default function Page() {
     try {
       const data = {
         email: email,
-        password: password
+        password: password,
       };
-      const res = await api.post('/auth/login', data);
-      console.log(res.data);
+
+      const res = await api.post("/auth/login", data);
+
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
-        const dashboardPath = role === "SHIPPER" ? "/users/dashboard" : "/shipper/dashboard";
-        router.push(dashboardPath);
+
+        const userRole = res.data.user.role;
+
+        if (userRole === "SHIPPER") {
+          router.push("/shipper/dashboard");
+        } else if (userRole === "DRIVER" || userRole === "CARRIER") {
+          router.push("/users/dashboard");
+        } else {
+          router.push("/");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -119,23 +127,6 @@ export default function Page() {
                   required
                 />
               </div>
-              <div className="w-full mt-6">
-                <label className="text-sm text-indigo-800">Login as:</label>
-                <select
-                  className="w-full mt-2 border border-indigo-100 rounded-full h-12 px-4 text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-200 bg-white"
-                  value={role}
-                  onChange={(e) => {
-                    setRole(e.target.value);
-                  }}
-                >
-                  <option className="text-indigo-900" value="SHIPPER">
-                    Shipper
-                  </option>
-                  <option className="text-indigo-900" value="DRIVER">
-                    Driver
-                  </option>
-                </select>
-              </div>
 
               <button
                 type="submit"
@@ -145,21 +136,10 @@ export default function Page() {
               </button>
 
               <div className="w-full flex justify-center mt-8 text-indigo-700/80">
-                {/* <div className="flex items-center gap-2">
-                  <input
-                    className="h-5 w-5 accent-indigo-600"
-                    type="checkbox"
-                    id="checkbox"
-                  />
-                  <label className="text-sm text-indigo-800" htmlFor="checkbox">
-                    Remember me
-                  </label>
-                </div> */}
                 <a className="text-sm text-indigo-600 hover:underline" href="#">
                   Forgot password?
                 </a>
               </div>
-
 
               <p className="text-indigo-700 text-sm mt-4 text-center">
                 Dont have an account?{" "}
