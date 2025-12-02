@@ -5,6 +5,6 @@ function generateToken(user){
     { id: user.id, role: user.role },
     process.env.JWT_SECRET,
     { expiresIn: "7d" }
-  );
-};
+  )
+}
 module.exports = { generateToken };
