@@ -59,13 +59,13 @@ export default function Dashboard() {
     });
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen w-full overflow-hidden">
             <Sidebar />
 
-            <div className="flex-1 bg-gradient-to-b from-[rgba(237,200,255,0.2)] to-transparent min-h-screen overflow-y-auto overflow-x-auto">
+            <div className="flex-1 bg-gradient-to-b from-[rgba(237,200,255,0.2)] to-transparent h-full overflow-y-auto min-w-0">
                 <Header title="User Dashboard" />
 
-                <div className="p-6 flex space-x-6">
+                <div className="p-6 flex flex-col xl:flex-row gap-6">
                     <div className="flex-1 space-y-6">
                         <Quote />
                         <Filters
