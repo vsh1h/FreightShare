@@ -8,7 +8,47 @@ import { api } from "../../../lib/api";
 export default function Page() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
+
+  const handleGoogleLogin = async () => {
+    // Simulate Google OAuth - In production, this would be actual OAuth
+    const mockGoogleEmail = prompt("Enter your Google email (for testing):");
+
+    if (!mockGoogleEmail) return;
+
+    try {
+      // Check if user exists in database
+      const res = await api.post("/auth/check-user", {
+        email: mockGoogleEmail,
+      });
+
+      if (res.data.exists) {
+        // User exists, log them in
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+
+          const userRole = res.data.user.role;
+          if (userRole === "SHIPPER") {
+            router.push("/users/dashboard");
+          } else if (userRole === "CARRIER") {
+            router.push("/shipper/dashboard");
+          }
+        }
+      } else {
+        // User doesn't exist, redirect to role selection for signup
+        const userName = prompt("Enter your name (for testing):");
+        if (userName) {
+          localStorage.setItem("oauth_email", mockGoogleEmail);
+          localStorage.setItem("oauth_name", userName);
+          router.push("/role-selection");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      setError("Failed to authenticate with Google");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,8 +59,8 @@ export default function Page() {
       };
 
       const res = await api.post("/auth/login", data);
-      console.log(res)
-      console.log(res.data)
+      console.log(res);
+      console.log(res.data);
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
 
@@ -53,7 +93,10 @@ export default function Page() {
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-transparent">
         <div className="relative">
           <div className="bg-white rounded-3xl shadow-2xl border border-indigo-100/60 p-6 md:p-8 w-80 md:w-96">
-            <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full flex flex-col items-center"
+            >
               <h2 className="text-4xl font-medium bg-gradient-to-r from-purple-600 to-indigo-500 text-transparent bg-clip-text">
                 Log in
               </h2>
@@ -63,7 +106,8 @@ export default function Page() {
 
               <button
                 type="button"
-                className="w-full mt-8 border border-indigo-200 bg-white flex items-center justify-center h-12 rounded-full shadow-sm"
+                onClick={handleGoogleLogin}
+                className="w-full mt-8 border border-indigo-200 bg-white flex items-center justify-center h-12 rounded-full shadow-sm hover:bg-gray-50 transition-colors"
               >
                 <Image
                   src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/login/googleLogo.svg"
@@ -128,6 +172,12 @@ export default function Page() {
                   required
                 />
               </div>
+
+              {error && (
+                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm text-center">
+                  {error}
+                </div>
+              )}
 
               <button
                 type="submit"

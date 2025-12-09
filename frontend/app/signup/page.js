@@ -3,7 +3,7 @@ import { useState } from "react";
 import banner from "../assets/freightshare-banner.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import {api} from '../../lib/api'
+import { api } from "../../lib/api";
 
 export default function Page() {
   const [name, setName] = useState("");
@@ -13,25 +13,40 @@ export default function Page() {
   const [role, setRole] = useState("SHIPPER");
   const router = useRouter();
 
+  const handleGoogleSignup = () => {
+
+    const mockGoogleUser = {
+      email: prompt("Enter your Google email (for testing):"),
+      name: prompt("Enter your name (for testing):"),
+    };
+
+    if (mockGoogleUser.email && mockGoogleUser.name) {
+
+      localStorage.setItem("oauth_email", mockGoogleUser.email);
+      localStorage.setItem("oauth_name", mockGoogleUser.name);
+
+      router.push("/role-selection");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data={
-      name:name,
-      phone:phone,
-      password:password,
-      email:email,
-      role:role
-    }
-    try{
-      const res = await api.post('/auth/signup', data)
-      console.log(res.token)
-      if(res.data.token){
-        localStorage.setItem("token", res.data.token)
-        router.push('/login')
+    const data = {
+      name: name,
+      phone: phone,
+      password: password,
+      email: email,
+      role: role,
+    };
+    try {
+      const res = await api.post("/auth/signup", data);
+      console.log(res.token);
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        router.push("/login");
       }
-      
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -61,7 +76,8 @@ export default function Page() {
 
             <button
               type="button"
-              className="w-full mt-8 border border-indigo-200 bg-white flex items-center justify-center h-12 rounded-full shadow-sm"
+              onClick={handleGoogleSignup}
+              className="w-full mt-8 border border-indigo-200 bg-white flex items-center justify-center h-12 rounded-full shadow-sm hover:bg-gray-50 transition-colors"
             >
               <Image
                 src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/login/googleLogo.svg"
@@ -70,7 +86,7 @@ export default function Page() {
                 height={80}
               />
             </button>
-            
+
             <div className="flex items-center gap-4 w-full my-5">
               <div className="w-full h-px bg-indigo-100"></div>
               <p className="w-full text-nowrap text-sm text-indigo-700/80 text-center">
