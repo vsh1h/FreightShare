@@ -81,7 +81,7 @@ export default function ContactPage() {
                         <div className="w-24 h-24 bg-purple-100 rounded-full mx-auto mb-4 flex items-center justify-center">
                             <User className="w-10 h-10 text-purple-500" />
                         </div>
-                        <h3 className="text-xl font-bold text-gray-800">Bhawna Talkute</h3>
+                        <h3 className="text-xl font-bold text-gray-800">Bhavana Talkute</h3>
                         <p className="text-purple-600 text-sm font-medium mb-4">Head of Product</p>
                         <div className="flex items-center justify-center gap-2 text-gray-500 text-sm bg-gray-50 py-2 rounded-lg">
                             <Mail className="w-4 h-4" />
