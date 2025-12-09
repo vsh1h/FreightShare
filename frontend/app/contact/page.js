@@ -85,7 +85,7 @@ export default function ContactPage() {
                         <p className="text-purple-600 text-sm font-medium mb-4">Head of Product</p>
                         <div className="flex items-center justify-center gap-2 text-gray-500 text-sm bg-gray-50 py-2 rounded-lg">
                             <Mail className="w-4 h-4" />
-                            <span>bhawna@freightshare.com</span>
+                            <span>bhavana@freightshare.com</span>
                         </div>
                     </div>
                 </div>
