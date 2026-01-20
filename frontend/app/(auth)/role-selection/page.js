@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { api } from "../../../lib/api";
 
-export default function RoleSelection() {
+function RoleSelectionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedRole, setSelectedRole] = useState("");
@@ -283,5 +283,13 @@ export default function RoleSelection() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function RoleSelection() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RoleSelectionContent />
+    </Suspense>
   );
 }
